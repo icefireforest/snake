@@ -1,0 +1,35 @@
+{
+  "name": "snake",
+  "version": "1.0.0",
+  "description": "1. 初始化npm包管理器\r     npm init -y\r 2. 安装webpack相关包\r     npm i -D webpack webpack-cli typescript ts-loader\r 3.  配置webpack.config.js\r     const path = require(\"path\");\r     module.exports = {\r         //入口目录\r         entry:\"./src/index.ts\",\r         output:{\r             path: path.resolve(__dirname,\"dist\"),\r             filename:\"boundle.js\"\r         },\r         module:{\r             rules:[\r             {\r                 test:/\\.ts$/,\r                 use:\"ts-loader\",\r                 exclude:/node-modules/\r              }\r             ]   \r         }\r     } \r 4.配置tsconfig.json文件\r     {\r     \"compilerOptions\": {\r         \"module\": \"ES2015\",\r         \"target\": \"ES2015\",\r         \"strict\": true,\r         \"noEmitOnError\": true\r         }\r     }\r 5. package.json文件中配置build命令\r     \"build\": \"webpack\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack serve --open chrome.exe"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "core-js": "^3.12.1",
+    "css-loader": "^5.2.4",
+    "html-webpack-plugin": "^5.3.1",
+    "less": "^4.1.1",
+    "less-loader": "^9.0.0",
+    "postcss": "^8.2.15",
+    "postcss-loader": "^5.3.0",
+    "postcss-preset-env": "^6.7.0",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^9.1.2",
+    "typescript": "^4.2.4",
+    "webpack": "^5.37.0",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {}
+}
