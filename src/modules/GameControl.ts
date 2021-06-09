@@ -57,10 +57,32 @@ class GameControl {
                 break;
 
         }
-        this.snake.X = x;
-        this.snake.Y = y;
+        this.checkEat(x,y);
+           
+        
+        try{
+            this.snake.X = x;
+            this.snake.Y = y;    
+        }catch(e){
+            //弹框提示错误
+            alert(e.message);
+            // 游戏结束
+            this.isLive = false;
+        }
+        
+        this.isLive && setTimeout(this.run.bind(this),300 - (this.scorePanel.level-1)*30);
+    }
 
-        this.isLive && setTimeout(this.run.bind(this),300 * (this.scorePanel.level-1)*30);
+    //检查蛇是否吃到食物
+    checkEat(x: number,y: number){
+        if (x===this.food.X && y===this.food.Y){
+             //食物位置变换
+             this.food.change();
+             //分属加1
+             this.scorePanel.addScore();
+             //蛇的身体加一节
+             this.snake.addBody();
+        }
     }
 
 
