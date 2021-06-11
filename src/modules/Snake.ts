@@ -30,8 +30,21 @@ class Snake {
             //蛇撞墙了
             throw new Error("蛇撞墙了!");
         }
+        //蛇向左走时，不能向右掉头;同理蛇向右走时，不能向左掉头
+        if(this.bodies[1] && (this.bodies[1] as HTMLElement).offsetLeft === value){
+            if(value > this.X){
+                //说明是往右走,此时发生掉头，应该继续往左走
+                value = this.X - 10;
+            }else{
+                value = this.X + 10;
+            }
+        }
+
         this.movBody();
         this.head.style.left = value+'px';
+
+        //检查有没有撞到自己
+        this.checkHeadBody();
     }
 
     set Y(value){
@@ -43,8 +56,22 @@ class Snake {
             //蛇撞墙了
             throw new Error("蛇撞墙了!");
         }
+
+        //蛇向上走时，不能向下掉头;同理蛇向下走时，不能向上掉头
+        if(this.bodies[1] && (this.bodies[1] as HTMLElement).offsetTop === value){
+            if(value > this.Y){
+                //说明是往上走,此时发生掉头，应该继续往上走
+                value = this.Y - 10;
+            }else{
+                value = this.Y + 10;
+            }
+        }
+
         this.movBody();
         this.head.style.top = value+'px';
+
+        //检查有没有撞到自己
+        this.checkHeadBody();
     }
 
    //蛇增加身体的方法
@@ -61,6 +88,18 @@ class Snake {
             (this.bodies[i] as HTMLElement).style.left = x+"px";
             (this.bodies[i] as HTMLElement).style.top = y+"px";
 
+        }
+
+    }
+
+    checkHeadBody(){
+        //检查所有的身体，检查是否和所有的坐标发生碰撞
+        for(let i = 1;i<this.bodies.length;i++){
+            let bd = this.bodies[i] as HTMLElement;
+            if(this.X===bd.offsetLeft && this.Y === bd.offsetTop){
+                // 说明蛇头碰到了身体
+                throw new Error("撞到自己了");
+            }
         }
     }
 }
